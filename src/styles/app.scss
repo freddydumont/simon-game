@@ -10,8 +10,20 @@ body {
   flex-direction: column;
   align-items: center;
 
-  img {
+  img.title {
     margin: 20px;
     height: 10vh;
   }
+}
+
+.switches {
+  width: 100vw;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.switch {
+  height: 10vh;
 }
