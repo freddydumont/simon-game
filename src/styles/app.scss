@@ -17,24 +17,32 @@ body {
   flex-direction: column;
   align-items: center;
 
+  //Poke(Si)mon title
   img.title {
     margin: 20px 0 10px 0;
     height: 10vh;
   }
 }
 
+/*****************
+ * SWITCHES
+ ****************/
 .switches {
   width: 100vw;
   max-width: 500px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: auto;
 }
 
 .switch {
   height: 10vh;
 }
 
+/*****************
+ * POKEBALL CENTER
+ ****************/
 .game {
   width: 100%;
   @include center;
@@ -42,7 +50,7 @@ body {
 
 .rectangle {
   @include center;
-  height: 10vh;
+  height: 7vh;
   width: 100%;
   background-color: #222224;
 }
@@ -61,4 +69,29 @@ body {
   width: 42vh;
   background-color: #f0f0f0;
   border-radius: 50%;
+}
+
+/*****************
+ * COUNT AND MODE
+ ****************/
+.count-and-mode {
+  width: 100vw;
+  max-width: 500px;
+  margin-bottom: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    height: 10vh;
+  }
+}
+
+.btn-mode {
+  height: 15vh;
 }

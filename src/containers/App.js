@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import GameSwitch from '../components/GameSwitch'
-import SoundSwitch from '../components/SoundSwitch'
-import Game from '../containers/Game'
-import title from '../images/title.png'
+import GameSwitch from '../components/GameSwitch';
+import SoundSwitch from '../components/SoundSwitch';
+import Count from '../components/Count';
+import ModeButton from '../components/ModeButton';
+import Game from '../containers/Game';
+import title from '../images/title.png';
 import '../styles/app.css';
 
 class App extends Component {
@@ -15,6 +17,10 @@ class App extends Component {
           <SoundSwitch />
         </div>
         <Game />
+        <div className="count-and-mode">
+          <Count />
+          <ModeButton />
+        </div>
       </div>
     );
   }
