@@ -1,3 +1,10 @@
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -11,7 +18,7 @@ body {
   align-items: center;
 
   img.title {
-    margin: 20px;
+    margin: 20px 0 10px 0;
     height: 10vh;
   }
 }
@@ -26,4 +33,32 @@ body {
 
 .switch {
   height: 10vh;
+}
+
+.game {
+  width: 100%;
+  @include center;
+}
+
+.rectangle {
+  @include center;
+  height: 10vh;
+  width: 100%;
+  background-color: #222224;
+}
+
+.circle-black {
+  @include center;
+  height: 50vh;
+  width: 50vh;
+  background-color: #222224;
+  border-radius: 50%;
+}
+
+.circle-white {
+  @include center;
+  height: 42vh;
+  width: 42vh;
+  background-color: #f0f0f0;
+  border-radius: 50%;
 }

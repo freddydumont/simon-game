@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameSwitch from '../components/GameSwitch'
 import SoundSwitch from '../components/SoundSwitch'
+import Game from '../containers/Game'
 import title from '../images/title.png'
 import '../styles/app.css';
 
@@ -13,6 +14,7 @@ class App extends Component {
           <GameSwitch />
           <SoundSwitch />
         </div>
+        <Game />
       </div>
     );
   }
