@@ -3,3 +3,15 @@ body {
   height: 100vh;
   background: linear-gradient(to bottom, #ee1515 0%,#ee1515 50%,#f0f0f0 51%,#f0f0f0 100%);
 }
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin: 20px;
+    height: 10vh;
+  }
+}
