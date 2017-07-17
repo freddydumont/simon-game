@@ -1,3 +1,8 @@
+@font-face {
+  font-family: pokemonGB;
+  src: url(../fonts/pokemongb.ttf);
+}
+
 @mixin center {
   position: absolute;
   top: 50%;
@@ -114,7 +119,7 @@ body {
 .count-and-mode {
   width: 100vw;
   max-width: 500px;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
@@ -132,3 +137,12 @@ body {
 .btn-mode {
   height: 15vh;
 }
+
+/*****************
+ * CREDITS
+ ****************/
+ .credits {
+   text-align: center;
+   font-family: pokemonGB, sans-serif;
+   font-size: 0.25em;
+ }

@@ -21,6 +21,10 @@ class App extends Component {
           <Count />
           <ModeButton />
         </div>
+        <div className="credits">
+          <p>Icon pack designed by <a href="http://www.flaticon.com/authors/roundicons-freebies">
+            Roundicons Freebies</a> from <a href="http://www.flaticon.com">Flaticon</a>.</p>
+        </div>
       </div>
     );
   }
