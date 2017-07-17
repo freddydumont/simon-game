@@ -4,9 +4,7 @@ import soundsSmn from '../images/sounds_smn.svg';
 
 const SoundSwitch = () => {
   return (
-    <div className="sound-switch">
-      <img className="switch" src={soundsPkm} alt="Sound Switch" />
-    </div>
+    <img className="switch" src={soundsPkm} alt="Sound Switch" />
   );
 }
 

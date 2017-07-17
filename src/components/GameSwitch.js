@@ -4,9 +4,7 @@ import gameOff from '../images/game_off.svg';
 
 const GameSwitch = () => {
   return (
-    <div className="game-switch">
-      <img className="switch" src={gameOn} alt="Game Switch" />
-    </div>
+    <img className="switch" src={gameOn} alt="Game Switch" />
   );
 }
 
