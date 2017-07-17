@@ -72,6 +72,43 @@ body {
 }
 
 /*****************
+ * POKEMON GRID
+ ****************/
+.pokemon-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.pokemon {
+  img {
+    height: 14vh;
+  }
+}
+
+// grid items
+.item-1 {
+  justify-self: end;
+  align-self: end;
+}
+
+.item-2 {
+  justify-self: start;
+  align-self: end;
+}
+
+.item-3 {
+  justify-self: end;
+  align-self: start;
+}
+
+.item-4 {
+  justify-self: start;
+  align-self: start;
+}
+
+/*****************
  * COUNT AND MODE
  ****************/
 .count-and-mode {
