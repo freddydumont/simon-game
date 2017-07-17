@@ -3,7 +3,7 @@ import GameSwitch from '../components/GameSwitch';
 import SoundSwitch from '../components/SoundSwitch';
 import Count from '../components/Count';
 import ModeButton from '../components/ModeButton';
-import Game from '../containers/Game';
+import Game from '../components/Game';
 import title from '../images/title.png';
 import '../styles/app.css';
 

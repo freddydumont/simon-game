@@ -4,7 +4,7 @@ const Game = () => (
   <div className="game">
     <div className="rectangle"></div>
     <div className="circle-black"></div>
-    <div className="circle-white"></div>
+    <div className="circle-white pokemon-container"></div>
   </div>
 );
 
