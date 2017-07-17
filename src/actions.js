@@ -6,3 +6,12 @@ export function switchMode() {
     type: SWITCH_MODE
   }
 }
+
+// SWITCH SOUNDS
+export const SWITCH_SOUNDS = 'SWITCH_SOUNDS';
+
+export function switchSounds() {
+  return {
+    type: SWITCH_SOUNDS
+  }
+}
