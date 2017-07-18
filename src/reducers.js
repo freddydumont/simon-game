@@ -79,6 +79,16 @@ function simonSounds(state = initialSimonSounds, action) {
   }
 }
 
+/*****************
+ * COUNT
+ ****************/
+function count(state = 0, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
 const reducer = combineReducers({
   isGameStarted,
   isStrictMode,
