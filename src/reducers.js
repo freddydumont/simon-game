@@ -94,6 +94,10 @@ function count(state = 0, action) {
   switch (action.type) {
     case INCREMENT_COUNT:
       return state + 1;
+    case TURN_GAME_ON:
+      return 1;
+    case TURN_GAME_OFF:
+      return 0;
     default:
       return state;
   }
