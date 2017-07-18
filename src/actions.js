@@ -1,9 +1,17 @@
-// SWITCH GAME
-export const SWITCH_GAME = 'SWITCH_GAME';
+// TURN GAME ON OFF
+export const TURN_GAME_ON = 'TURN_GAME_ON';
 
-export function switchGame() {
+export function turnGameOn() {
   return {
-    type: SWITCH_GAME
+    type: TURN_GAME_ON
+  }
+}
+
+export const TURN_GAME_OFF = 'TURN_GAME_OFF';
+
+export function turnGameOff() {
+  return {
+    type: TURN_GAME_OFF
   }
 }
 

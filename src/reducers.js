@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 import { Howl } from 'howler';
-import { SWITCH_MODE, SWITCH_SOUNDS, SWITCH_GAME, INCREMENT_COUNT } from './actions.js';
+import {
+  SWITCH_MODE,
+  SWITCH_SOUNDS,
+  TURN_GAME_ON,
+  TURN_GAME_OFF,
+  INCREMENT_COUNT
+} from './actions.js';
 // import sounds
 import bulbasaur from './sounds/cry-bulbasaur.mp3'
 import charmander from './sounds/cry-charmander.mp3'
@@ -34,8 +40,10 @@ for (let i = 0; i < 4; i++) {
  ****************/
 function isGameStarted(state = false, action) {
   switch (action.type) {
-    case SWITCH_GAME:
-      return !state;
+    case TURN_GAME_ON:
+      return true;
+    case TURN_GAME_OFF:
+      return false;
     default:
       return state;
   }

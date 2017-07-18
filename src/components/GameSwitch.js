@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { switchGame } from '../actions';
+import { turnGameOn, turnGameOff } from '../actions';
 import gameOn from '../images/game_on.svg';
 import gameOff from '../images/game_off.svg';
 
-let GameSwitch = ({ isGameStarted, switchGame }) => {
+let GameSwitch = ({ isGameStarted, turnGameOn, turnGameOff }) => {
   return (
     <img
       className="switch"
       src={isGameStarted ? gameOn : gameOff}
-      onClick={switchGame}
+      onClick={isGameStarted ? turnGameOff : turnGameOn}
       alt="Game Switch" />
   );
 }
@@ -22,7 +22,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    switchGame: () => dispatch(switchGame())
+    turnGameOn: () => dispatch(turnGameOn()),
+    turnGameOff: () => dispatch(turnGameOff())
   }
 }
 
