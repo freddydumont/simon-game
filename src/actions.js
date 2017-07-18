@@ -1,3 +1,12 @@
+// SWITCH GAME
+export const SWITCH_GAME = 'SWITCH_GAME';
+
+export function switchGame() {
+  return {
+    type: SWITCH_GAME
+  }
+}
+
 // SWITCH MODE
 export const SWITCH_MODE = 'SWITCH_MODE';
 
