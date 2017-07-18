@@ -13,10 +13,10 @@ let Game = () => {
       <div className="rectangle"></div>
       <div className="circle-black"></div>
       <div className="circle-white pokemon-container">
-        <Pokemon pos={1} image={bulbasaur} />
-        <Pokemon pos={2} image={charmander} />
-        <Pokemon pos={3} image={pikachu} />
-        <Pokemon pos={4} image={squirtle} />
+        <Pokemon image={bulbasaur} />
+        <Pokemon image={charmander} />
+        <Pokemon image={pikachu} />
+        <Pokemon image={squirtle} />
       </div>
     </div>
   );

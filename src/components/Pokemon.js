@@ -2,7 +2,7 @@ import React from 'react';
 
 const Pokemon = ({ pos, image }) => {
   return (
-    <div className={`pokemon item-${pos}`} >
+    <div className="pokemon" >
       <img src={image} alt="Pokemon" />
     </div>
   );
