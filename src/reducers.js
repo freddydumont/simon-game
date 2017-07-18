@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { Howl } from 'howler';
-import { SWITCH_MODE, SWITCH_SOUNDS, SWITCH_GAME } from './actions.js';
+import { SWITCH_MODE, SWITCH_SOUNDS, SWITCH_GAME, INCREMENT_COUNT } from './actions.js';
 // import sounds
 import bulbasaur from './sounds/cry-bulbasaur.mp3'
 import charmander from './sounds/cry-charmander.mp3'
@@ -84,6 +84,8 @@ function simonSounds(state = initialSimonSounds, action) {
  ****************/
 function count(state = 0, action) {
   switch (action.type) {
+    case INCREMENT_COUNT:
+      return state + 1;
     default:
       return state;
   }
