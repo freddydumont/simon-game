@@ -94,6 +94,7 @@ const reducer = combineReducers({
   isStrictMode,
   isPokeSounds,
   pokeSounds,
-  simonSounds
+  simonSounds,
+  count
 });
 export default reducer;

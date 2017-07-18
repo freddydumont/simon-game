@@ -1,14 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import countLabel from '../images/count.svg';
-import gold from '../images/gold/gold_20.svg';
+import gold from '../goldImages'
 
-const Count = () => {
+let Count = ({ count }) => {
   return (
     <div className="count">
       <img src={countLabel} alt="Count" />
-      <img src={gold} alt="1" />
+      <img src={gold[`gold${count}`]} alt={count} />
     </div>
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    count: state.count
+  }
+}
+
+Count = connect(mapStateToProps)(Count);
 export default Count;
