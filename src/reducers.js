@@ -99,12 +99,25 @@ function count(state = 0, action) {
   }
 }
 
+/*****************
+ * SEQUENCE
+ ****************/
+function sequence(state = null, action) {
+  switch (action.type) {
+    case TURN_GAME_ON:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const reducer = combineReducers({
   isGameStarted,
   isStrictMode,
   isPokeSounds,
   pokeSounds,
   simonSounds,
-  count
+  count,
+  sequence
 });
 export default reducer;

@@ -2,8 +2,14 @@
 export const TURN_GAME_ON = 'TURN_GAME_ON';
 
 export function turnGameOn() {
+  // create a sequence of 20 numbers between 0 and 3
+  let sequence = [];
+  for (let i = 0; i < 20; i++) {
+    sequence.push(Math.floor(Math.random() * 4));
+  }
   return {
-    type: TURN_GAME_ON
+    type: TURN_GAME_ON,
+    payload: sequence
   }
 }
 
