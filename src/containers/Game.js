@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Pokemon from '../components/Pokemon';
-// pokemon images
-import bulbasaur from '../images/bulbasaur.svg';
-import charmander from '../images/charmander.svg';
-import pikachu from '../images/pikachu.svg';
-import squirtle from '../images/squirtle.svg';
+import pokeImages from '../pokemonImages';
 
 let Game = () => {
   return (
@@ -13,10 +9,10 @@ let Game = () => {
       <div className="rectangle"></div>
       <div className="circle-black"></div>
       <div className="circle-white pokemon-container">
-        <Pokemon image={bulbasaur} />
-        <Pokemon image={charmander} />
-        <Pokemon image={pikachu} />
-        <Pokemon image={squirtle} />
+        <Pokemon image={pokeImages['bulbasaur']} />
+        <Pokemon image={pokeImages['charmander']} />
+        <Pokemon image={pokeImages['pikachu']} />
+        <Pokemon image={pokeImages['squirtle']} />
       </div>
     </div>
   );
