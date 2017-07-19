@@ -5,7 +5,8 @@ import {
   SWITCH_SOUNDS,
   TURN_GAME_ON,
   TURN_GAME_OFF,
-  INCREMENT_COUNT
+  INCREMENT_COUNT,
+  ACTIVATE_POKEMON
 } from './actions.js';
 // import sounds
 import bulbasaur from './sounds/cry-bulbasaur.mp3'
@@ -115,6 +116,18 @@ function sequence(state = null, action) {
   }
 };
 
+/*****************
+ * GLOW
+ ****************/
+function glowing(state = null, action) {
+  switch (action.type) {
+    case ACTIVATE_POKEMON:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const reducer = combineReducers({
   isGameStarted,
   isStrictMode,
@@ -122,6 +135,7 @@ const reducer = combineReducers({
   pokeSounds,
   simonSounds,
   count,
-  sequence
+  sequence,
+  glowing
 });
 export default reducer;
