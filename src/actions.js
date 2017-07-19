@@ -47,3 +47,13 @@ export function incrementCount() {
     type: INCREMENT_COUNT
   }
 }
+
+// ACTIVATE POKEMON (when playing sequence or on click)
+export const ACTIVATE_POKEMON = 'ACTIVATE_POKEMON';
+
+export function activatePokemon(number) {
+  return {
+    type: ACTIVATE_POKEMON,
+    payload: number
+  }
+}
