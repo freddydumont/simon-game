@@ -4,19 +4,19 @@ import { turnGameOn, turnGameOff } from '../actions';
 import gameOn from '../images/game_on.svg';
 import gameOff from '../images/game_off.svg';
 
-let GameSwitch = ({ isGameStarted, turnGameOn, turnGameOff }) => {
+let GameSwitch = ({ isGameOn, turnGameOn, turnGameOff }) => {
   return (
     <img
       className="switch"
-      src={isGameStarted ? gameOn : gameOff}
-      onClick={isGameStarted ? turnGameOff : turnGameOn}
+      src={isGameOn ? gameOn : gameOff}
+      onClick={isGameOn ? turnGameOff : turnGameOn}
       alt="Game Switch" />
   );
 }
 
 const mapStateToProps = state => {
   return {
-    isGameStarted: state.isGameStarted
+    isGameOn: state.isGameOn
   }
 }
 

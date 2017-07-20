@@ -19,7 +19,7 @@ class StartButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    isGameStarted: state.isGameStarted
+    isGameOn: state.isGameOn
   }
 }
 

@@ -39,7 +39,7 @@ for (let i = 0; i < 4; i++) {
 /*****************
  * GAME ON OFF
  ****************/
-function isGameStarted(state = false, action) {
+function isGameOn(state = false, action) {
   switch (action.type) {
     case TURN_GAME_ON:
       return true;
@@ -129,7 +129,7 @@ function glowing(state = null, action) {
 };
 
 const reducer = combineReducers({
-  isGameStarted,
+  isGameOn,
   isStrictMode,
   isPokeSounds,
   pokeSounds,
