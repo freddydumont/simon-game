@@ -30,6 +30,17 @@ export function startGame() {
   }
 }
 
+// CREATE LEVEL (create a level corresponding to count out of sequence)
+export const CREATE_LEVEL = 'CREATE_LEVEL';
+
+export function createLevel(count, sequence) {
+  const level = sequence.slice(0, count);
+  return {
+    type: CREATE_LEVEL,
+    payload: level
+  }
+}
+
 // SWITCH MODE
 export const SWITCH_MODE = 'SWITCH_MODE';
 
