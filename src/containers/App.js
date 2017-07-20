@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameSwitch from '../components/GameSwitch';
+import StartButton from '../components/StartButton';
 import SoundSwitch from '../components/SoundSwitch';
 import Count from '../components/Count';
 import ModeButton from '../components/ModeButton';
@@ -14,6 +15,7 @@ class App extends Component {
         <img className="title" src={title} alt="Poké(Si)mon" />
         <div className="switches">
           <GameSwitch />
+          <StartButton />
           <SoundSwitch />
         </div>
         <Game />
