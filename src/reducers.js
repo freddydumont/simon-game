@@ -5,6 +5,7 @@ import {
   SWITCH_SOUNDS,
   TURN_GAME_ON,
   TURN_GAME_OFF,
+  START_GAME,
   INCREMENT_COUNT,
   ACTIVATE_POKEMON
 } from './actions.js';
@@ -99,6 +100,8 @@ function count(state = null, action) {
       return 0;
     case TURN_GAME_OFF:
       return null;
+    case START_GAME:
+      return 1;
     default:
       return state;
   }

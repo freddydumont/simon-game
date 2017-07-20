@@ -21,6 +21,15 @@ export function turnGameOff() {
   }
 }
 
+// START GAME
+export const START_GAME = 'START_GAME';
+
+export function startGame() {
+  return {
+    type: START_GAME
+  }
+}
+
 // SWITCH MODE
 export const SWITCH_MODE = 'SWITCH_MODE';
 
