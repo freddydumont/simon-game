@@ -91,14 +91,14 @@ function simonSounds(state = initialSimonSounds, action) {
 /*****************
  * COUNT
  ****************/
-function count(state = 0, action) {
+function count(state = null, action) {
   switch (action.type) {
     case INCREMENT_COUNT:
       return state + 1;
     case TURN_GAME_ON:
-      return 1;
-    case TURN_GAME_OFF:
       return 0;
+    case TURN_GAME_OFF:
+      return null;
     default:
       return state;
   }

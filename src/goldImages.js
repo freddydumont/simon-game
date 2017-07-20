@@ -1,4 +1,5 @@
-import gold0 from './images/gold/gold_00.svg';
+import goldnull from './images/gold/gold_00.svg';
+import gold0 from './images/gold/press_to_start.svg';
 import gold1 from './images/gold/gold_01.svg';
 import gold2 from './images/gold/gold_02.svg';
 import gold3 from './images/gold/gold_03.svg';
@@ -22,6 +23,7 @@ import gold20 from './images/gold/gold_20.svg';
 
 // exporting as an object to be able to access keys dynamically in a separate file
 export default {
+  goldnull,
   gold0,
   gold1,
   gold2,
