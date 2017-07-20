@@ -13,7 +13,9 @@ class StartButton extends Component {
         className="switch"
         src={this.state.image}
         onMouseDown={() => this.setState({ image: startPressed })}
-        onMouseUp={() => this.setState({ image: start })}
+        onMouseUp={() => setTimeout(() => {
+          this.setState({ image: start })
+        }, 100)}
         onClick={isGameOn ? startGame : null}
         alt="Start Button" />
     );
