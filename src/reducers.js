@@ -6,6 +6,7 @@ import {
   TURN_GAME_ON,
   TURN_GAME_OFF,
   START_GAME,
+  CREATE_LEVEL,
   INCREMENT_COUNT,
   ACTIVATE_POKEMON
 } from './actions.js';
@@ -120,6 +121,18 @@ function sequence(state = null, action) {
 };
 
 /*****************
+ * LEVEL
+ ****************/
+function level(state = null, action) {
+  switch (action.type) {
+    case CREATE_LEVEL:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+/*****************
  * GLOW
  ****************/
 function glowing(state = null, action) {
@@ -139,6 +152,7 @@ const reducer = combineReducers({
   simonSounds,
   count,
   sequence,
+  level,
   glowing
 });
 export default reducer;
