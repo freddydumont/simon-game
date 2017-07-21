@@ -25,9 +25,18 @@ export function turnGameOff() {
 export const START_GAME = 'START_GAME';
 
 export function startGame() {
-  return {
-    type: START_GAME
-  }
+  // using redux-sequence-action middleware to chain actions
+  // and redux-thunk to resolve action creators
+  return [
+    {
+      type: START_GAME
+    },
+    // after startGame, call createLevel with updated store
+    (dispatch, getState) => {
+      const { count, sequence } = getState();
+      dispatch(createLevel(count, sequence));
+    }
+  ]
 }
 
 // CREATE LEVEL (create a level corresponding to count out of sequence)
