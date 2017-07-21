@@ -44,9 +44,48 @@ export const CREATE_LEVEL = 'CREATE_LEVEL';
 
 export function createLevel(count, sequence) {
   const level = sequence.slice(0, count);
+  return [
+    {
+      type: CREATE_LEVEL,
+      payload: level
+    },
+    // after level is created, call playLevel with a slight delay
+    (dispatch, getState) => {
+      const { level, sounds } = getState();
+      setTimeout(function () {
+        dispatch(playLevel(level, sounds));
+      }, 500);
+    }
+  ]
+}
+
+// PLAY LEVEL
+export const PLAY_LEVEL = 'PLAY_LEVEL';
+
+export function playLevel(level, sounds) {
+  // for each element in level, play sound and glow corresponding pokemon
+  return dispatch => {
+    level.forEach(element => {
+      sounds[element].once('play', () => {
+        // glow pokemon
+        dispatch(glowPokemon(element));
+      })
+      sounds[element].once('end', () => {
+        // set glowing to null
+        dispatch(glowPokemon(null));
+      })
+      sounds[element].play();
+    });
+  }
+}
+
+// GLOW POKEMON (when playing sequence or on click)
+export const GLOW_POKEMON = 'GLOW_POKEMON';
+
+export function glowPokemon(number) {
   return {
-    type: CREATE_LEVEL,
-    payload: level
+    type: GLOW_POKEMON,
+    payload: number
   }
 }
 
@@ -75,15 +114,5 @@ export const INCREMENT_COUNT = 'INCREMENT_COUNT';
 export function incrementCount() {
   return {
     type: INCREMENT_COUNT
-  }
-}
-
-// ACTIVATE POKEMON (when playing sequence or on click)
-export const ACTIVATE_POKEMON = 'ACTIVATE_POKEMON';
-
-export function activatePokemon(number) {
-  return {
-    type: ACTIVATE_POKEMON,
-    payload: number
   }
 }

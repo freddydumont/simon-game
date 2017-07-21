@@ -7,7 +7,7 @@ import {
   START_GAME,
   CREATE_LEVEL,
   INCREMENT_COUNT,
-  ACTIVATE_POKEMON
+  GLOW_POKEMON
 } from './actions.js';
 import Howls from './sounds';
 
@@ -105,7 +105,7 @@ function level(state = null, action) {
  ****************/
 function glowing(state = null, action) {
   switch (action.type) {
-    case ACTIVATE_POKEMON:
+    case GLOW_POKEMON:
       return action.payload;
     default:
       return state;
