@@ -28,11 +28,5 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    startGame: () => dispatch(startGame())
-  }
-}
-
-StartButton = connect(mapStateToProps, mapDispatchToProps)(StartButton);
+StartButton = connect(mapStateToProps, { startGame })(StartButton);
 export default StartButton;
