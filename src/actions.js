@@ -65,17 +65,26 @@ export const PLAY_LEVEL = 'PLAY_LEVEL';
 export function playLevel(level, sounds) {
   // for each element in level, play sound and glow corresponding pokemon
   return dispatch => {
-    level.forEach(element => {
+    function playRecursively(i) {
+      // base case
+      if (i >= level.length) {
+        return;
+      }
+
+      let element = level[i];
+      // on play, glow pokemon corresponding to element
       sounds[element].once('play', () => {
-        // glow pokemon
         dispatch(glowPokemon(element));
       })
+      // on end, set glowing to null
       sounds[element].once('end', () => {
-        // set glowing to null
         dispatch(glowPokemon(null));
+        // recursive case
+        return playRecursively(i + 1);
       })
       sounds[element].play();
-    });
+    }
+    playRecursively(0);
   }
 }
 
