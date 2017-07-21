@@ -62,9 +62,10 @@ export function switchMode() {
 // SWITCH SOUNDS
 export const SWITCH_SOUNDS = 'SWITCH_SOUNDS';
 
-export function switchSounds() {
+export function switchSounds(pos) {
   return {
-    type: SWITCH_SOUNDS
+    type: SWITCH_SOUNDS,
+    payload: pos
   }
 }
 

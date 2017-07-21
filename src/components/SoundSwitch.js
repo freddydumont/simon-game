@@ -9,7 +9,7 @@ let SoundSwitch = ({ isPokeSounds, switchSounds }) => {
     <img
       className="switch"
       src={isPokeSounds ? soundsPkm : soundsSmn}
-      onClick={switchSounds}
+      onClick={() => { isPokeSounds ? switchSounds(1) : switchSounds(0) }}
       alt="Sound Switch" />
   );
 }
@@ -20,12 +20,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    switchSounds: () => dispatch(switchSounds())
-  }
-}
-
-SoundSwitch = connect(mapStateToProps, mapDispatchToProps)(SoundSwitch);
+SoundSwitch = connect(mapStateToProps, { switchSounds })(SoundSwitch);
 
 export default SoundSwitch;
