@@ -7,7 +7,8 @@ import {
   START_GAME,
   CREATE_LEVEL,
   INCREMENT_COUNT,
-  GLOW_POKEMON
+  GLOW_POKEMON,
+  PLAY_LEVEL
 } from './actions.js';
 import Howls from './sounds';
 
@@ -112,10 +113,23 @@ function glowing(state = null, action) {
   }
 };
 
+/*****************
+ * PLAYER TURN
+ ****************/
+function isPlayerTurn(state = false, action) {
+  switch (action.type) {
+    case PLAY_LEVEL:
+      return true;
+    default:
+      return state;
+  }
+}
+
 const reducer = combineReducers({
   isGameOn,
   isStrictMode,
   isPokeSounds,
+  isPlayerTurn,
   sounds,
   count,
   sequence,

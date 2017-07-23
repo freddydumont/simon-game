@@ -62,14 +62,16 @@ export function createLevel(count, sequence) {
 // PLAY LEVEL
 export const PLAY_LEVEL = 'PLAY_LEVEL';
 
-export function playLevel(level, sounds) {
+function playLevel(level, sounds) {
   // for each element in level, play sound and glow corresponding pokemon
   return dispatch => {
     function playRecursively(i) {
       // base case
       if (i >= level.length) {
-        return;
-      }
+        // when all sounds are played, dispatch PLAY_LEVEL
+        // to set isPlayerTurn to true
+        return dispatch({ type: PLAY_LEVEL });
+      };
 
       let element = level[i];
       // on play, glow pokemon corresponding to element
