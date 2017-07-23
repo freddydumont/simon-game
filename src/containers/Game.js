@@ -18,15 +18,7 @@ let Game = ({ glowing }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    isGameStarted: state.isGameStarted,
-    isStrictMode: state.isStrictMode,
-    sounds: state.isPokeSounds ? state.pokeSounds : state.simonSounds,
-    sequence: state.sequence ? state.sequence.slice(0, state.count) : null,
-    glowing: state.glowing
-  }
-}
+const mapStateToProps = ({ glowing }) => ({ glowing });
 
 Game = connect(mapStateToProps)(Game);
 export default Game;
