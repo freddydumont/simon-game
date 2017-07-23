@@ -70,7 +70,10 @@ function playLevel(level, sounds) {
       if (i >= level.length) {
         // when all sounds are played, dispatch PLAY_LEVEL
         // to set isPlayerTurn to true
-        return dispatch({ type: PLAY_LEVEL });
+        return [
+          dispatch({ type: PLAY_LEVEL }),
+          dispatch(playerTurn())
+        ];
       };
 
       let element = level[i];
@@ -89,6 +92,22 @@ function playLevel(level, sounds) {
     playRecursively(0);
   }
 }
+
+// PLAYER_TURN
+function playerTurn() {
+  return (dispatch, getState) => {
+    const { sounds, level } = getState();
+    console.log(sounds, level);
+  }
+}
+
+// refactor later (extract function from logic)
+// function playSoundAndGlow(dispatch, getState, sounds, pokeNumber) {
+//   // on play, glow pokemon corresponding to element
+//   sounds[pokeNumber].once('play', () => {
+//     dispatch(glowPokemon(pokeNumber));
+//   })
+// }
 
 // GLOW POKEMON (when playing sequence or on click)
 export const GLOW_POKEMON = 'GLOW_POKEMON';
