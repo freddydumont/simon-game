@@ -120,6 +120,8 @@ function isPlayerTurn(state = false, action) {
   switch (action.type) {
     case PLAY_LEVEL:
       return true;
+    case START_GAME:
+      return false;
     default:
       return state;
   }

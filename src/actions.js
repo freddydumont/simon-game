@@ -21,6 +21,25 @@ export function turnGameOff() {
   }
 }
 
+// SWITCH MODE
+export const SWITCH_MODE = 'SWITCH_MODE';
+
+export function switchMode() {
+  return {
+    type: SWITCH_MODE
+  }
+}
+
+// SWITCH SOUNDS
+export const SWITCH_SOUNDS = 'SWITCH_SOUNDS';
+
+export function switchSounds(pos) {
+  return {
+    type: SWITCH_SOUNDS,
+    payload: pos
+  }
+}
+
 // START GAME
 export const START_GAME = 'START_GAME';
 
@@ -50,10 +69,9 @@ export function createLevel(count, sequence) {
       payload: level
     },
     // after level is created, call playLevel with a slight delay
-    (dispatch, getState) => {
-      const { level, sounds } = getState();
+    dispatch => {
       setTimeout(function () {
-        dispatch(playLevel(level, sounds));
+        dispatch(playLevel());
       }, 500);
     }
   ]
@@ -62,54 +80,46 @@ export function createLevel(count, sequence) {
 // PLAY LEVEL
 export const PLAY_LEVEL = 'PLAY_LEVEL';
 
-function playLevel(level, sounds) {
-  // for each element in level, play sound and glow corresponding pokemon
-  return dispatch => {
-    function playRecursively(i) {
+// for each element in level, play sound and glow corresponding pokemon
+function playLevel() {
+  return (dispatch, getState) => {
+    const { level } = getState();
+    // recursive IIFE takes care of playing each pokemon successively
+    (function playRecursively(i) {
       // base case
       if (i >= level.length) {
-        // when all sounds are played, dispatch PLAY_LEVEL
-        // to set isPlayerTurn to true
+        // when all are played, dispatch PLAY_LEVEL to set isPlayerTurn to true
         return [
           dispatch({ type: PLAY_LEVEL }),
           dispatch(playerTurn())
         ];
       };
+      // recursive case is within playSoundAndGlow
+      playSoundAndGlow(dispatch, getState, level[i], playRecursively, i);
+    })(0)
+  }
+}
 
-      let element = level[i];
-      // on play, glow pokemon corresponding to element
-      sounds[element].once('play', () => {
-        dispatch(glowPokemon(element));
-      })
-      // on end, set glowing to null
-      sounds[element].once('end', () => {
-        dispatch(glowPokemon(null));
-        // recursive case
-        return playRecursively(i + 1);
-      })
-      sounds[element].play();
+// PLAY SOUND AND GLOW POKEMON
+function playSoundAndGlow(dispatch, getState, pokeNumber, playRecursively, i) {
+  const { sounds, isPlayerTurn } = getState()
+  // on play, glow pokemon corresponding to pokeNumber
+  sounds[pokeNumber].once('play', () => {
+    dispatch(glowPokemon(pokeNumber));
+  })
+  // on end, set glowing to null
+  sounds[pokeNumber].once('end', () => {
+    dispatch(glowPokemon(null));
+    // recursive case if isPlayerTurn is false
+    if (!isPlayerTurn) {
+      return playRecursively(i + 1);
     }
-    playRecursively(0);
-  }
+  })
+  // play
+  sounds[pokeNumber].play();
 }
 
-// PLAYER_TURN
-function playerTurn() {
-  return (dispatch, getState) => {
-    const { sounds, level } = getState();
-    console.log(sounds, level);
-  }
-}
-
-// refactor later (extract function from logic)
-// function playSoundAndGlow(dispatch, getState, sounds, pokeNumber) {
-//   // on play, glow pokemon corresponding to element
-//   sounds[pokeNumber].once('play', () => {
-//     dispatch(glowPokemon(pokeNumber));
-//   })
-// }
-
-// GLOW POKEMON (when playing sequence or on click)
+// GLOW POKEMON
 export const GLOW_POKEMON = 'GLOW_POKEMON';
 
 export function glowPokemon(number) {
@@ -119,22 +129,11 @@ export function glowPokemon(number) {
   }
 }
 
-// SWITCH MODE
-export const SWITCH_MODE = 'SWITCH_MODE';
-
-export function switchMode() {
-  return {
-    type: SWITCH_MODE
-  }
-}
-
-// SWITCH SOUNDS
-export const SWITCH_SOUNDS = 'SWITCH_SOUNDS';
-
-export function switchSounds(pos) {
-  return {
-    type: SWITCH_SOUNDS,
-    payload: pos
+// PLAYER_TURN
+function playerTurn() {
+  return (dispatch, getState) => {
+    const { sounds, level } = getState();
+    console.log(sounds, level);
   }
 }
 
