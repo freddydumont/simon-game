@@ -85,40 +85,44 @@ export const PLAY_LEVEL = 'PLAY_LEVEL';
 // for each element in level, play sound and glow corresponding pokemon
 function playLevel() {
   return (dispatch, getState) => {
-    const { level } = getState();
-    // recursive IIFE takes care of playing each pokemon successively
-    (function playRecursively(i) {
-      // base case
-      if (i >= level.length) {
-        // when all are played, dispatch PLAY_LEVEL to set isPlayerTurn to true
-        return [
-          dispatch({ type: PLAY_LEVEL }),
-          dispatch(playerTurn())
-        ];
-      };
-      // recursive case is within playSoundAndGlow
-      playSoundAndGlow(dispatch, getState, level[i], playRecursively, i);
-    })(0)
+    const { level, isGameOn } = getState();
+    if (isGameOn) {
+      // recursive IIFE takes care of playing each pokemon successively
+      (function playRecursively(i) {
+        // base case
+        if (i >= level.length) {
+          // when all are played, dispatch PLAY_LEVEL to set isPlayerTurn to true
+          return [
+            dispatch({ type: PLAY_LEVEL }),
+            dispatch(playerTurn())
+          ];
+        };
+        // recursive case is within playSoundAndGlow
+        playSoundAndGlow(dispatch, getState, level[i], playRecursively, i);
+      })(0)
+    }
   }
 }
 
 // PLAY SOUND AND GLOW POKEMON
 function playSoundAndGlow(dispatch, getState, pokeNumber, playRecursively, i) {
-  const { sounds, isPlayerTurn } = getState()
-  // on play, glow pokemon corresponding to pokeNumber
-  sounds[pokeNumber].once('play', () => {
-    dispatch(glowPokemon(pokeNumber));
-  })
-  // on end, set glowing to null
-  sounds[pokeNumber].once('end', () => {
-    dispatch(glowPokemon(null));
-    // recursive case if isPlayerTurn is false
-    if (!isPlayerTurn) {
-      return playRecursively(i + 1);
-    }
-  })
-  // play
-  sounds[pokeNumber].play();
+  const { sounds, isPlayerTurn, isGameOn } = getState()
+  if (isGameOn) {
+    // on play, glow pokemon corresponding to pokeNumber
+    sounds[pokeNumber].once('play', () => {
+      dispatch(glowPokemon(pokeNumber));
+    })
+    // on end, set glowing to null
+    sounds[pokeNumber].once('end', () => {
+      dispatch(glowPokemon(null));
+      // recursive case if isPlayerTurn is false
+      if (!isPlayerTurn) {
+        return playRecursively(i + 1);
+      }
+    })
+    // play
+    sounds[pokeNumber].play();
+  }
 }
 
 // GLOW POKEMON
@@ -151,22 +155,24 @@ export const RESET = 'RESET';
 
 function error() {
   return (dispatch, getState) => {
-    let { count, isStrictMode } = getState();
-    if (isStrictMode) {
-      count = 1;
+    let { count, isStrictMode, isGameOn } = getState();
+    if (isGameOn) {
+      if (isStrictMode) {
+        count = 1;
+      }
+      // will set count to 'error' to display error image
+      errorSound.once('play', () => {
+        dispatch({ type: ERROR });
+      })
+      // will set count to 1 if strict mode and previous count if not
+      // and dispatch startGame to restart
+      errorSound.once('end', () => {
+        dispatch({ type: RESET, payload: count });
+        dispatch(startGame());
+      })
+      // play error sound
+      errorSound.play();
     }
-    // will set count to 'error' to display error image
-    errorSound.once('play', () => {
-      dispatch({ type: ERROR });
-    })
-    // will set count to 1 if strict mode and previous count if not
-    // and dispatch startGame to restart
-    errorSound.once('end', () => {
-      dispatch({ type: RESET, payload: count });
-      dispatch(startGame());
-    })
-    // play error sound
-    errorSound.play();
   }
 }
 
