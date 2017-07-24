@@ -9,10 +9,10 @@ let Game = ({ glowing }) => {
       <div className="rectangle"></div>
       <div className="circle-black"></div>
       <div className="circle-white pokemon-container">
-        <Pokemon image={pokeImages[glowing === 0 ? 'bulbasaurGlow' : 'bulbasaur']} key={0} />
-        <Pokemon image={pokeImages[glowing === 1 ? 'charmanderGlow' : 'charmander']} key={1} />
-        <Pokemon image={pokeImages[glowing === 2 ? 'pikachuGlow' : 'pikachu']} key={2} />
-        <Pokemon image={pokeImages[glowing === 3 ? 'squirtleGlow' : 'squirtle']} key={3} />
+        <Pokemon image={pokeImages[glowing === 0 ? 'bulbasaurGlow' : 'bulbasaur']} num={0} />
+        <Pokemon image={pokeImages[glowing === 1 ? 'charmanderGlow' : 'charmander']} num={1} />
+        <Pokemon image={pokeImages[glowing === 2 ? 'pikachuGlow' : 'pikachu']} num={2} />
+        <Pokemon image={pokeImages[glowing === 3 ? 'squirtleGlow' : 'squirtle']} num={3} />
       </div>
     </div>
   );
