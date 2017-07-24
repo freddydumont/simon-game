@@ -21,8 +21,6 @@ function isGameOn(state = false, action) {
   switch (action.type) {
     case TURN_GAME_ON:
       return true;
-    case TURN_GAME_OFF:
-      return false;
     default:
       return state;
   }
@@ -70,8 +68,6 @@ function count(state = null, action) {
       return state + 1;
     case TURN_GAME_ON:
       return 0;
-    case TURN_GAME_OFF:
-      return null;
     case START_GAME:
       return 1;
     case ERROR:
@@ -133,7 +129,7 @@ function isPlayerTurn(state = false, action) {
   }
 }
 
-const reducer = combineReducers({
+const appReducer = combineReducers({
   isGameOn,
   isStrictMode,
   isPokeSounds,
@@ -144,4 +140,11 @@ const reducer = combineReducers({
   level,
   glowing
 });
-export default reducer;
+
+const rootReducer = (state, action) => {
+  if (action.type === TURN_GAME_OFF) {
+    state = undefined;
+  }
+  return appReducer(state, action)
+}
+export default rootReducer;
