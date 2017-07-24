@@ -133,6 +133,8 @@ function isPlayerTurn(state = false, action) {
       return true;
     case START_GAME:
       return false;
+    case ERROR:
+      return false;
     default:
       return state;
   }
