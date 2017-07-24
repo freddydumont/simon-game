@@ -1,3 +1,5 @@
+import { errorSound } from './sounds.js';
+
 // TURN GAME ON OFF
 export const TURN_GAME_ON = 'TURN_GAME_ON';
 
@@ -130,11 +132,23 @@ export function glowPokemon(number) {
 }
 
 // PLAYER_TURN
+var timeout;
 function playerTurn() {
+  // set a timeout of 3 seconds that is disabled when user clicks a pokemon on his turn
+  timeout = setTimeout(function () {
+    // if user doesn't play in time, dispatch error
+    error();
+  }, 3000);
   return (dispatch, getState) => {
     const { sounds, level } = getState();
     console.log(sounds, level);
   }
+}
+
+function error() {
+  // play error sound
+  errorSound.play();
+  // display error image under count
 }
 
 // INCREMENT COUNT

@@ -7,6 +7,7 @@ import simonSound1 from './sounds/simonSound1.mp3'
 import simonSound2 from './sounds/simonSound2.mp3'
 import simonSound3 from './sounds/simonSound3.mp3'
 import simonSound4 from './sounds/simonSound4.mp3'
+import error from './sounds/error.mp3'
 
 let pokeSounds = [bulbasaur, charmander, pikachu, squirtle];
 let simonSounds = [simonSound4, simonSound3, simonSound2, simonSound1];
@@ -25,3 +26,6 @@ function createSounds(soundSource) {
 
 // export an array containing an array of poke sounds and one of simon sounds
 export default [createSounds(pokeSounds), createSounds(simonSounds)]
+
+// export error sound
+export const errorSound = new Howl({ src: error });
