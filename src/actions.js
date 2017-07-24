@@ -167,8 +167,10 @@ function error() {
       // will set count to 1 if strict mode and previous count if not
       // and dispatch startGame to restart
       errorSound.once('end', () => {
-        dispatch({ type: RESET, payload: count });
-        dispatch(startGame());
+        if (getState().isGameOn) {
+          dispatch({ type: RESET, payload: count });
+          dispatch(startGame());
+        }
       })
       // play error sound
       errorSound.play();
