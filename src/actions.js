@@ -149,6 +149,15 @@ function playerTurn() {
   }
 }
 
+export const CLICK_POKEMON = 'CLICK_POKEMON';
+
+export function clickPokemon() {
+  return (dispatch, getState) => {
+    const { level } = getState();
+    console.log(level);
+  }
+}
+
 // ERROR
 export const ERROR = 'ERROR';
 export const RESET = 'RESET';
