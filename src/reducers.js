@@ -8,7 +8,9 @@ import {
   CREATE_LEVEL,
   INCREMENT_COUNT,
   GLOW_POKEMON,
-  PLAY_LEVEL
+  PLAY_LEVEL,
+  ERROR,
+  RESET
 } from './actions.js';
 import Howls from './sounds';
 
@@ -72,6 +74,10 @@ function count(state = null, action) {
       return null;
     case START_GAME:
       return 1;
+    case ERROR:
+      return 'error';
+    case RESET:
+      return action.payload;
     default:
       return state;
   }

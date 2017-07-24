@@ -74,7 +74,7 @@ export function createLevel(count, sequence) {
     dispatch => {
       setTimeout(function () {
         dispatch(playLevel());
-      }, 500);
+      }, 1000);
     }
   ]
 }
@@ -134,21 +134,40 @@ export function glowPokemon(number) {
 // PLAYER_TURN
 var timeout;
 function playerTurn() {
-  // set a timeout of 3 seconds that is disabled when user clicks a pokemon on his turn
-  timeout = setTimeout(function () {
-    // if user doesn't play in time, dispatch error
-    error();
-  }, 3000);
   return (dispatch, getState) => {
-    const { sounds, level } = getState();
-    console.log(sounds, level);
+    if (getState().isGameOn) {
+      // set a timeout that is disabled when user clicks a pokemon on his turn
+      timeout = setTimeout(function () {
+        // if user doesn't play in time, dispatch error
+        dispatch(error());
+      }, 3000);
+    }
   }
 }
 
+// ERROR
+export const ERROR = 'ERROR';
+export const RESET = 'RESET';
+
 function error() {
-  // play error sound
-  errorSound.play();
-  // display error image under count
+  return (dispatch, getState) => {
+    let { count, isStrictMode } = getState();
+    if (isStrictMode) {
+      count = 1;
+    }
+    // will set count to 'error' to display error image
+    errorSound.once('play', () => {
+      dispatch({ type: ERROR });
+    })
+    // will set count to 1 if strict mode and previous count if not
+    // and dispatch startGame to restart
+    errorSound.once('end', () => {
+      dispatch({ type: RESET, payload: count });
+      dispatch(startGame());
+    })
+    // play error sound
+    errorSound.play();
+  }
 }
 
 // INCREMENT COUNT
