@@ -7,7 +7,7 @@ import startPressed from '../images/start_pressed.svg';
 class StartButton extends Component {
   state = { image: start }
   render() {
-    const { isGameOn, startGame } = this.props;
+    const { isGameOn, isGameStarted, startGame } = this.props;
     return (
       <img
         className="switch"
@@ -16,7 +16,11 @@ class StartButton extends Component {
         onMouseUp={() => setTimeout(() => {
           this.setState({ image: start })
         }, 100)}
-        onClick={isGameOn ? startGame : null}
+        onClick={() => {
+          if (isGameOn && !isGameStarted) {
+            startGame();
+          }
+        }}
         alt="Start Button" />
     );
   }
@@ -24,7 +28,8 @@ class StartButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    isGameOn: state.isGameOn
+    isGameOn: state.isGameOn,
+    isGameStarted: state.isGameStarted
   }
 }
 

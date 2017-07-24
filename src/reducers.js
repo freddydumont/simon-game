@@ -26,6 +26,15 @@ function isGameOn(state = false, action) {
   }
 };
 
+function isGameStarted(state = false, action) {
+  switch (action.type) {
+    case START_GAME:
+      return true;
+    default:
+      return state;
+  }
+};
+
 /*****************
  * STRICT MODE
  ****************/
@@ -131,6 +140,7 @@ function isPlayerTurn(state = false, action) {
 
 const appReducer = combineReducers({
   isGameOn,
+  isGameStarted,
   isStrictMode,
   isPokeSounds,
   isPlayerTurn,
