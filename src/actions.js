@@ -86,6 +86,7 @@ export const PLAY_LEVEL = 'PLAY_LEVEL';
 function playLevel() {
   return (dispatch, getState) => {
     const { level, isGameOn } = getState();
+    console.log(`in playLevel, level is ${level}`);
     if (isGameOn) {
       // recursive IIFE takes care of playing each pokemon successively
       (function playRecursively(i) {
@@ -149,13 +150,43 @@ function playerTurn() {
   }
 }
 
+// USER INPUTS
 export const CLICK_POKEMON = 'CLICK_POKEMON';
 
-export function clickPokemon() {
-  return (dispatch, getState) => {
-    const { level } = getState();
-    console.log(level);
-  }
+export function clickPokemon(pokeNumber) {
+  // first thing to do is to stop the timer
+  clearTimeout(timeout);
+  // then dispatch the updated userInputs
+  return [
+    (dispatch, getState) => {
+      const { userInputs } = getState();
+      // clone userInputs and add last user input to it
+      let inputs = userInputs.length > 0 ? userInputs.slice() : [];
+      inputs.push(pokeNumber);
+      dispatch({ type: CLICK_POKEMON, payload: inputs });
+    },
+    // then check if user pressed the correct pokemon
+    (dispatch, getState) => {
+      const { level, userInputs } = getState();
+      // compare last number in inputs to equivalent in level
+      let current = userInputs.length - 1;
+      if (userInputs[current] !== level[current]) {
+        return dispatch(error());
+      } else {
+        playSoundAndGlow(dispatch, getState, pokeNumber);
+      }
+      // check if inputs and level have the same length to know if level is done
+      if (level.length === userInputs.length) {
+        // level is completed, increment count and create a new level
+        dispatch(incrementCount());
+        const { count, sequence } = getState();
+        return dispatch(createLevel(count, sequence));
+      } else {
+        // level is not completed, call playerTurn to restart the timeout
+        return dispatch(playerTurn());
+      }
+    }
+  ]
 }
 
 // ERROR

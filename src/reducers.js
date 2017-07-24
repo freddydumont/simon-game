@@ -10,7 +10,8 @@ import {
   GLOW_POKEMON,
   PLAY_LEVEL,
   ERROR,
-  RESET
+  RESET,
+  CLICK_POKEMON
 } from './actions.js';
 import Howls from './sounds';
 
@@ -132,13 +133,28 @@ function isPlayerTurn(state = false, action) {
     case PLAY_LEVEL:
       return true;
     case START_GAME:
-      return false;
+    case CREATE_LEVEL:
     case ERROR:
       return false;
     default:
       return state;
   }
 }
+
+/*****************
+ * USER INPUTS
+ ****************/
+function userInputs(state = [], action) {
+  switch (action.type) {
+    case CLICK_POKEMON:
+      return action.payload;
+    case RESET:
+    case INCREMENT_COUNT:
+      return [];
+    default:
+      return state;
+  }
+};
 
 const appReducer = combineReducers({
   isGameOn,
@@ -150,6 +166,7 @@ const appReducer = combineReducers({
   count,
   sequence,
   level,
+  userInputs,
   glowing
 });
 
