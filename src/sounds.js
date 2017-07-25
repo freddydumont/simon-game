@@ -18,7 +18,8 @@ function createSounds(soundSource) {
   for (let i = 0; i < 4; i++) {
     sounds.push(new Howl({
       src: [soundSource[i]],
-      rate: soundSource === simonSounds ? 0.5 : 1
+      rate: soundSource === simonSounds ? 0.5 : 1,
+      volume: soundSource === pokeSounds ? 0.1 : 1
     }))
   }
   return sounds;
@@ -28,4 +29,4 @@ function createSounds(soundSource) {
 export default [createSounds(pokeSounds), createSounds(simonSounds)]
 
 // export error sound
-export const errorSound = new Howl({ src: error });
+export const errorSound = new Howl({ src: error, volume: 0.1 });
