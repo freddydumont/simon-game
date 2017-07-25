@@ -197,21 +197,23 @@ export const RESET = 'RESET';
 
 function error() {
   return (dispatch, getState) => {
-    let { count, isStrictMode, isGameOn } = getState();
+    let { count, sequence, isStrictMode, isGameOn } = getState();
     if (isGameOn) {
-      if (isStrictMode) {
-        count = 1;
-      }
       // will set count to 'error' to display error image
       errorSound.once('play', () => {
         dispatch({ type: ERROR });
       })
+
       // will set count to 1 if strict mode and previous count if not
-      // and dispatch startGame to restart
+      // and dispatch createLevel to restart
+      if (isStrictMode) {
+        count = 1;
+      }
+
       errorSound.once('end', () => {
         if (getState().isGameOn) {
           dispatch({ type: RESET, payload: count });
-          dispatch(startGame());
+          dispatch(createLevel(count, sequence));
         }
       })
       // play error sound

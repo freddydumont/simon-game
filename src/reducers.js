@@ -134,6 +134,7 @@ function isPlayerTurn(state = false, action) {
       return true;
     case START_GAME:
     case CREATE_LEVEL:
+    case TURN_GAME_ON:
     case ERROR:
       return false;
     default:
