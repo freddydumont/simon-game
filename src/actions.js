@@ -115,10 +115,12 @@ function playSoundAndGlow(dispatch, getState, pokeNumber, playRecursively, i) {
     })
     // on end, set glowing to null
     sounds[pokeNumber].once('end', () => {
-      dispatch(glowPokemon(null));
-      // recursive case if isPlayerTurn is false
-      if (!isPlayerTurn) {
-        return playRecursively(i + 1);
+      if (isGameOn) {
+        dispatch(glowPokemon(null));
+        // recursive case if isPlayerTurn is false
+        if (!isPlayerTurn) {
+          return playRecursively(i + 1);
+        }
       }
     })
     // play
