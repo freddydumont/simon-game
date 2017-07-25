@@ -89,6 +89,7 @@ body {
 
 .pokemon {
   cursor: pointer;
+  user-select: none;
   img {
     height: 14vh;
   }
