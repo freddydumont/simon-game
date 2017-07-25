@@ -11,7 +11,8 @@ import {
   PLAY_LEVEL,
   ERROR,
   RESET,
-  CLICK_POKEMON
+  CLICK_POKEMON,
+  WIN
 } from './actions.js';
 import Howls from './sounds';
 
@@ -31,6 +32,8 @@ function isGameStarted(state = false, action) {
   switch (action.type) {
     case START_GAME:
       return true;
+    case WIN:
+      return false;
     default:
       return state;
   }
@@ -82,6 +85,8 @@ function count(state = null, action) {
       return 1;
     case ERROR:
       return 'error';
+    case WIN:
+      return 'won';
     case RESET:
       return action.payload;
     default:
@@ -95,6 +100,7 @@ function count(state = null, action) {
 function sequence(state = null, action) {
   switch (action.type) {
     case TURN_GAME_ON:
+    case WIN:
       return action.payload;
     default:
       return state;
@@ -136,6 +142,7 @@ function isPlayerTurn(state = false, action) {
     case CREATE_LEVEL:
     case TURN_GAME_ON:
     case ERROR:
+    case WIN:
       return false;
     default:
       return state;
@@ -151,6 +158,7 @@ function userInputs(state = [], action) {
       return action.payload;
     case RESET:
     case INCREMENT_COUNT:
+    case WIN:
       return [];
     default:
       return state;

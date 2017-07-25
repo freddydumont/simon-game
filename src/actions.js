@@ -182,7 +182,12 @@ export function clickPokemon(pokeNumber) {
         // level is completed, increment count and create a new level
         dispatch(incrementCount());
         const { count, sequence } = getState();
-        return dispatch(createLevel(count, sequence));
+        // if count > 20, game is won, dispatch win action
+        if (count > 20) {
+          return dispatch(gameWon());
+        } else {
+          return dispatch(createLevel(count, sequence));
+        }
       } else {
         // level is not completed, call playerTurn to restart the timeout
         return dispatch(playerTurn());
@@ -225,8 +230,23 @@ function error() {
 // INCREMENT COUNT
 export const INCREMENT_COUNT = 'INCREMENT_COUNT';
 
-export function incrementCount() {
+function incrementCount() {
   return {
     type: INCREMENT_COUNT
+  }
+}
+
+// GAME WON
+export const WIN = 'WIN';
+
+function gameWon() {
+  // create a new sequence for next game
+  let sequence = [];
+  for (let i = 0; i < 20; i++) {
+    sequence.push(Math.floor(Math.random() * 4));
+  }
+  return {
+    type: WIN,
+    payload: sequence
   }
 }
