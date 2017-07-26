@@ -1,7 +1,7 @@
 {
   "name": "simon-game",
   "homepage": "https://freddydumont.github.io/simon-game",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "howler": "^2.0.4",
