@@ -1,6 +1,7 @@
 {
   "name": "simon-game",
-  "version": "0.1.0",
+  "homepage": "https://freddydumont.github.io/simon-game",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "howler": "^2.0.4",
@@ -12,6 +13,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "gh-pages": "^1.0.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "react-scripts": "1.0.10"
@@ -23,6 +25,8 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
