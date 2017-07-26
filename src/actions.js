@@ -18,6 +18,7 @@ export function turnGameOn() {
 export const TURN_GAME_OFF = 'TURN_GAME_OFF';
 
 export function turnGameOff() {
+  clearTimeout(timeout);
   return {
     type: TURN_GAME_OFF
   }
@@ -86,8 +87,7 @@ export const PLAY_LEVEL = 'PLAY_LEVEL';
 function playLevel() {
   return (dispatch, getState) => {
     const { level, isGameOn } = getState();
-    console.log(`in playLevel, level is ${level}`);
-    if (isGameOn) {
+    if (isGameOn && level !== []) {
       // recursive IIFE takes care of playing each pokemon successively
       (function playRecursively(i) {
         // base case
@@ -107,7 +107,7 @@ function playLevel() {
 
 // PLAY SOUND AND GLOW POKEMON
 function playSoundAndGlow(dispatch, getState, pokeNumber, playRecursively, i) {
-  const { sounds, isPlayerTurn, isGameOn } = getState()
+  const { sounds, isPlayerTurn, isGameOn, level } = getState()
   if (isGameOn) {
     // on play, glow pokemon corresponding to pokeNumber
     sounds[pokeNumber].once('play', () => {
@@ -118,8 +118,12 @@ function playSoundAndGlow(dispatch, getState, pokeNumber, playRecursively, i) {
       if (isGameOn) {
         dispatch(glowPokemon(null));
         // recursive case if isPlayerTurn is false
-        if (!isPlayerTurn) {
-          return playRecursively(i + 1);
+        // null check on level to avoid infinite game loop on certain edge cases
+        // ex: TURN_GAME_ON and ...OFF are dispatched between onPlay and onEnd
+        if (level !== null) {
+          if (!isPlayerTurn) {
+            return playRecursively(i + 1);
+          }
         }
       }
     })
