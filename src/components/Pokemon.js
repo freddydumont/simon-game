@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { clickPokemon } from '../actions';
 
-let Pokemon = ({ image, num, isPlayerTurn, isGameOn, clickPokemon }) => {
+let Pokemon = ({ image, num, isPlayerTurn, isGameOn, clickPokemon, level }) => {
   return (
     <div className="pokemon" >
       <img
         src={image} alt="Pokemon"
         onClick={() => {
-          if (isPlayerTurn && isGameOn) {
+          if (isPlayerTurn && isGameOn && level) {
             clickPokemon(num);
           }
         }} />
@@ -16,6 +16,6 @@ let Pokemon = ({ image, num, isPlayerTurn, isGameOn, clickPokemon }) => {
   );
 }
 
-const mapStateToProps = ({ isPlayerTurn, isGameOn }) => ({ isPlayerTurn, isGameOn });
+const mapStateToProps = ({ isPlayerTurn, isGameOn, level }) => ({ isPlayerTurn, isGameOn, level });
 Pokemon = connect(mapStateToProps, { clickPokemon })(Pokemon);
 export default Pokemon;

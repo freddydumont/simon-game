@@ -72,10 +72,16 @@ export function createLevel(count, sequence) {
       payload: level
     },
     // after level is created, call playLevel with a slight delay
-    dispatch => {
-      setTimeout(function () {
-        dispatch(playLevel());
-      }, 1000);
+    (dispatch, getState) => {
+      // check if game is started to catch errors
+      if (getState().isGameStarted) {
+        setTimeout(function () {
+          dispatch(playLevel());
+        }, 1000);
+      } else {
+        // if user turned game off and on during the error loop, reset game to 0
+        dispatch({ type: RESET, payload: 0 });
+      }
     }
   ]
 }
@@ -87,7 +93,7 @@ export const PLAY_LEVEL = 'PLAY_LEVEL';
 function playLevel() {
   return (dispatch, getState) => {
     const { level, isGameOn } = getState();
-    if (isGameOn && level !== []) {
+    if (isGameOn && level) {
       // recursive IIFE takes care of playing each pokemon successively
       (function playRecursively(i) {
         // base case
@@ -146,7 +152,8 @@ export function glowPokemon(number) {
 var timeout;
 function playerTurn() {
   return (dispatch, getState) => {
-    if (getState().isGameOn) {
+    const { isGameOn, level } = getState();
+    if (isGameOn && level) {
       // set a timeout that is disabled when user clicks a pokemon on his turn
       timeout = setTimeout(function () {
         // if user doesn't play in time, dispatch error
@@ -220,10 +227,8 @@ function error() {
       }
 
       errorSound.once('end', () => {
-        if (getState().isGameOn) {
-          dispatch({ type: RESET, payload: count });
-          dispatch(createLevel(count, sequence));
-        }
+        dispatch({ type: RESET, payload: count });
+        dispatch(createLevel(count, sequence));
       })
       // play error sound
       errorSound.play();
